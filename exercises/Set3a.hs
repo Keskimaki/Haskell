@@ -164,7 +164,7 @@ while check update value
 --   whileRight (step 1000) 3  ==> 1536
 
 whileRight :: (a -> Either b a) -> a -> b
-whileRight f x = case f x of Left y -> y 
+whileRight f x = case f x of Left y -> y
                              Right x -> whileRight f x
 
 -- for the whileRight examples:
@@ -184,7 +184,9 @@ step k x = if x<k then Right (2*x) else Left x
 -- Hint! This is a great use for list comprehensions
 
 joinToLength :: Int -> [String] -> [String]
-joinToLength = todo
+joinToLength i xs = nub (filter (\x -> length x == i) (joinToLength' xs (length xs - 1)))
+joinToLength' xs 0 = map (head xs ++) xs
+joinToLength' xs n = map (xs !! (length xs - n) ++) xs ++ joinToLength' xs (n-1)
 
 ------------------------------------------------------------------------------
 -- Ex 10: implement the operator +|+ that returns a list with the first
