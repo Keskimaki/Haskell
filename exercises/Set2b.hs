@@ -151,4 +151,6 @@ isPrime n = smallestDivisor n == n
 --   biggestPrimeAtMost 10 ==> 7
 
 biggestPrimeAtMost :: Integer -> Integer
-biggestPrimeAtMost = todo
+biggestPrimeAtMost n = if isPrime n
+                       then n
+                       else biggestPrimeAtMost (n-1)
