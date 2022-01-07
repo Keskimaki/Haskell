@@ -78,7 +78,10 @@ substring i j s = if length s >= (j + 1)
 --   isPalindrome "AB"       ==>  False
 
 isPalindrome :: String -> Bool
-isPalindrome str = todo
+isPalindrome str
+  | str == "" || length str == 1 = True
+  | head str == str !! (length str - 1) = isPalindrome (tail (init str))
+  | otherwise = False
 
 ------------------------------------------------------------------------------
 -- Ex 6: implement the function palindromify that chops a character
