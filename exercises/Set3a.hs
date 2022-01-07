@@ -220,7 +220,9 @@ xs +|+ ys = [head xs, head ys]
 --   sumRights [Left "bad!", Left "missing"]         ==>  0
 
 sumRights :: [Either a Int] -> Int
-sumRights = todo
+sumRights [] = 0
+sumRights (Left _ : xs) = sumRights xs
+sumRights (Right x : xs) = x + sumRights xs
 
 ------------------------------------------------------------------------------
 -- Ex 12: recall the binary function composition operation
