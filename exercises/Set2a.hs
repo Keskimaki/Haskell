@@ -174,4 +174,6 @@ eitherDiv x y = Right (div x y)
 --   addEithers (Left "boom") (Left "fail") ==> Left "boom"
 
 addEithers :: Either String Int -> Either String Int -> Either String Int
-addEithers a b = todo
+addEithers (Right a) (Right b) = Right (a + b)
+addEithers (Left a) _ = Left a
+addEithers _ (Left b) = Left b
