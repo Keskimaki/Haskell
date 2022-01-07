@@ -95,7 +95,11 @@ isPalindrome str
 --   palindromify "abracacabra" ==> "acaca"
 
 palindromify :: String -> String
-palindromify s = todo
+palindromify s = palindromify' s s
+palindromify' s str
+  | s == "" || length s == 1 = str
+  | head s == s !! (length s - 1) = palindromify' (tail (init s)) str
+  | otherwise = palindromify' (tail (init str)) (tail (init str))
 
 ------------------------------------------------------------------------------
 -- Ex 7: implement safe integer division, that is, a function that
