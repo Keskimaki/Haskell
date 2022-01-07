@@ -164,7 +164,8 @@ while check update value
 --   whileRight (step 1000) 3  ==> 1536
 
 whileRight :: (a -> Either b a) -> a -> b
-whileRight f x = todo
+whileRight f x = case f x of Left y -> y 
+                             Right x -> whileRight f x
 
 -- for the whileRight examples:
 -- step k x doubles x if it's less than k
