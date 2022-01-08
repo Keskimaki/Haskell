@@ -104,7 +104,15 @@ rangeOf xs = maximum xs - minimum xs
 --   longest [[1,2,3],[4,5],[6]] ==> [1,2,3]
 --   longest ["bcd","def","ab"] ==> "bcd"
 
-longest = todo
+longest :: Ord a => [[a]] -> [a]
+longest xs = minimum (filter (\x -> length x == highestLength xs) xs)
+
+highestLength :: [[a]] -> Int
+highestLength xs = highestLength' xs 0
+highestLength' [] l = l
+highestLength' (x:xs) l
+  | length x > l = highestLength' xs (length x)
+  | otherwise = highestLength' xs l
 
 ------------------------------------------------------------------------------
 -- Ex 6: Implement the function incrementKey, that takes a list of
