@@ -53,7 +53,7 @@ allEqual (x:xs) = go x xs
 --   distinct [1,2] ==> True
 
 distinct :: Eq a => [a] -> Bool
-distinct = todo
+distinct xs = xs == nub xs
 
 ------------------------------------------------------------------------------
 -- Ex 3: implement the function middle that returns the middle value
