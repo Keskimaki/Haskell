@@ -128,7 +128,11 @@ sumsOf' x1 (x2:xs) = x1 : sumsOf' (x1+x2) xs
 --   merge [1,1,6] [1,2]   ==> [1,1,1,2,6]
 
 merge :: [Int] -> [Int] -> [Int]
-merge xs ys = todo
+merge xs [] = xs
+merge [] ys= ys
+merge (x:xs) (y:ys) = if x > y
+                      then y : merge (x:xs) ys
+                      else x: merge xs (y:ys)
 
 ------------------------------------------------------------------------------
 -- Ex 8: define the function mymaximum that takes a list and a
