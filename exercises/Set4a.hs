@@ -236,4 +236,11 @@ swap i j arr = arr // [(i, arr ! j), (j, arr ! i)]
 -- Hint: check out Data.Array.indices or Data.Array.assocs
 
 maxIndex :: (Ix i, Ord a) => Array i a -> i
-maxIndex = todo
+maxIndex arr = head (filter (\x -> (arr ! x) == maximum (snd (unzip (assocs arr)))) (fst (unzip (assocs arr))))
+
+--maxIndex arr = index' arr (head (indices arr)) (arr ! head (indices arr)) 0
+--index' arr i e n
+--  | (length arr - 1) == n = i
+--  | otherwise = if (arr ! (indices arr !! n)) > e
+--                then index' arr (indices arr !! n) (arr ! (indices arr !! n)) (n+1)
+--                else index' arr i e (n+1)
