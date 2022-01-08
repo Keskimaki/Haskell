@@ -194,4 +194,9 @@ map2 f (a:as) (b:bs) = f a b : map2 f as bs
 --   ==> []
 
 maybeMap :: (a -> Maybe b) -> [a] -> [b]
-maybeMap f xs = todo
+maybeMap f [] = []
+maybeMap f (x:xs) = maybeMap' f xs (f x)
+maybeMap' f [] Nothing = []
+maybeMap' f [] (Just fx) = [fx]
+maybeMap' f (x:xs) Nothing = maybeMap' f xs (f x)
+maybeMap' f (x:xs) (Just fx) = fx : maybeMap' f xs (f x)
