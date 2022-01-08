@@ -35,7 +35,10 @@ import Data.Array
 -- you remove the Eq a => constraint from the type!
 
 allEqual :: Eq a => [a] -> Bool
-allEqual xs = todo
+allEqual [] = True
+allEqual (x:xs) = go x xs
+  where go _ [] = True
+        go n (x:xs) = (n == x) && go n xs
 
 ------------------------------------------------------------------------------
 -- Ex 2: implement the function distinct which returns True if all
