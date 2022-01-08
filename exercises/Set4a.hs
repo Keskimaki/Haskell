@@ -66,7 +66,11 @@ distinct xs = xs == nub xs
 --   middle 'b' 'a' 'c'  ==> 'b'
 --   middle 1 7 3        ==> 3
 
-middle = todo
+middle :: Ord a => a -> a -> a -> a
+middle a b c
+  | a > b && a > c = if b > c then b else c
+  | b > a && b > c = if a > c then a else c
+  | otherwise = if a > b then a else b
 
 ------------------------------------------------------------------------------
 -- Ex 4: return the range of an input list, that is, the difference
