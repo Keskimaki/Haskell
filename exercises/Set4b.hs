@@ -110,7 +110,8 @@ largestHelper b as
 myHead :: [a] -> Maybe a
 myHead xs = foldr headHelper Nothing xs
 
-headHelper = todo
+headHelper :: a -> Maybe a -> Maybe a
+headHelper b a = Just b
 
 ------------------------------------------------------------------------------
 -- Ex 7: get the last element of a list with a fold. Define lasthelper
