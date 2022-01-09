@@ -113,7 +113,10 @@ mapTree f (Node y l r) = Node (f y) (mapTree f l) (mapTree f r)
 --                 (Node 3 Empty Empty))
 
 cull :: Eq a => a -> Tree a -> Tree a
-cull val tree = todo
+cull val Empty = Empty
+cull val (Node y l r) = if y == val
+                        then Empty
+                        else Node y (cull val l) (cull val r)
 
 ------------------------------------------------------------------------------
 -- Ex 7: check if a tree is ordered. A tree is ordered if:
