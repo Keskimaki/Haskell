@@ -98,27 +98,27 @@ setAge age p = Person age (name p)
 --   getY (up (up origin))    ==> 2
 --   getX (up (right origin)) ==> 1
 
-data Position = PositionUndefined
+data Position = Position Int Int
 
 -- origin is a Position value with x and y set to 0
 origin :: Position
-origin = todo
+origin = Position 0 0
 
 -- getX returns the x of a Position
 getX :: Position -> Int
-getX = todo
+getX (Position x y) = x
 
 -- getY returns the y of a position
 getY :: Position -> Int
-getY = todo
+getY (Position x y) = y
 
 -- up increases the y value of a position by one
 up :: Position -> Position
-up = todo
+up (Position x y) = Position x (y + 1)
 
 -- right increases the x value of a position by one
 right :: Position -> Position
-right = todo
+right (Position x y) = Position (x + 1) y
 
 ------------------------------------------------------------------------------
 -- Ex 6: Here's a datatype that represents a student. A student can
