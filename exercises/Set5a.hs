@@ -206,7 +206,11 @@ data Color = Red | Green | Blue | Mix Color Color | Invert Color
   deriving Show
 
 rgb :: Color -> [Double]
-rgb col = todo
+rgb Red = [1,0,0]
+rgb Green = [0,1,0]
+rgb Blue = [0,0,1]
+rgb (Mix c1 c2) = map (/2) (zipWith (+) (rgb c1) (rgb c2))
+rgb (Invert c) = map (1-) (rgb c)
 
 ------------------------------------------------------------------------------
 -- Ex 9: define a parameterized datatype OneOrTwo that contains one or
