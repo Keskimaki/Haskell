@@ -90,8 +90,12 @@ concatHelper (b:bs) as = b : concatHelper bs as
 largest :: [Int] -> [Int]
 largest xs = foldr largestHelper [] xs
 
-largestHelper = todo
-
+largestHelper :: Int -> [Int] -> [Int]
+largestHelper b [] = [b]
+largestHelper b as
+  | b > maximum as = [b]
+  | b == maximum as = b : as
+  | otherwise = as
 
 ------------------------------------------------------------------------------
 -- Ex 6: get the first element of a list with a fold. Define
