@@ -230,4 +230,11 @@ set (StepR:xs) val (Node y l r) = Node y l (set xs val r)
 --                    (Node 5 Empty Empty))                     ==>  Just [StepL,StepR]
 
 search :: Eq a => a -> Tree a -> Maybe [Step]
-search = todo
+search _ Empty = Nothing
+search val (Node y l r)
+  | y == val = Just []
+  | otherwise = case search val l of
+                Nothing -> case search val r of
+                            Nothing -> Nothing
+                            (Just xs) -> Just (StepR:xs)            
+                (Just xs) -> Just (StepL:xs)
