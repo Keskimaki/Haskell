@@ -336,10 +336,20 @@ inc (O b) = I b
 inc (I b) = O (inc b)
 
 prettyPrint :: Bin -> String
-prettyPrint = todo
+prettyPrint End = ""
+prettyPrint (O b) = prettyPrint b ++ "0"
+prettyPrint (I b) = prettyPrint b ++ "1"
 
 fromBin :: Bin -> Int
-fromBin = todo
+fromBin b = fromBin' b 0
+  where fromBin' End n = 0
+        fromBin' (O b) n = 0 + fromBin' b (n+1)
+        fromBin' (I b) n = 2^n + fromBin' b (n+1)
 
 toBin :: Int -> Bin
-toBin = todo
+toBin d = toBin' 10 d
+  where toBin' 0 0 = O End
+        toBin' 1 0 = I End
+        toBin' 1 d = I (toBin' (mod d 2) (div d 2))
+        toBin' 0 d = O (toBin' (mod d 2) (div d 2))
+        toBin' m d = toBin' (mod d 2) (div d 2)
