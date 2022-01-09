@@ -114,9 +114,9 @@ mapTree f (Node y l r) = Node (f y) (mapTree f l) (mapTree f r)
 
 cull :: Eq a => a -> Tree a -> Tree a
 cull val Empty = Empty
-cull val (Node y l r) = if y == val
-                        then Empty
-                        else Node y (cull val l) (cull val r)
+cull val (Node y l r)
+  | y == val = Empty
+  | otherwise = Node y (cull val l) (cull val r)
 
 ------------------------------------------------------------------------------
 -- Ex 7: check if a tree is ordered. A tree is ordered if:
@@ -158,7 +158,17 @@ cull val (Node y l r) = if y == val
 --                     (Node 3 Empty Empty))   ==>   True
 
 isOrdered :: Ord a => Tree a -> Bool
-isOrdered = todo
+isOrdered Empty = True
+isOrdered (Node _ Empty Empty) = True
+isOrdered (Node y Empty (Node r r1 r2))
+  | y <= r = isOrdered (Node r r1 r2)
+  | otherwise = False
+isOrdered (Node y (Node l l1 l2) Empty)
+  | y >= l = isOrdered (Node l l1 l2)
+  | otherwise = False
+isOrdered (Node y (Node l l1 l2) (Node r r1 r2))
+  | y >= l && y <= r = isOrdered (Node l l1 l2) && isOrdered (Node r r1 r2)
+  | otherwise = False
 
 ------------------------------------------------------------------------------
 -- Ex 8: a path in a tree can be represented as a list of steps that
