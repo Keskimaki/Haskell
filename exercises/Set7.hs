@@ -212,7 +212,7 @@ data Multiply2 = Multiply2 Int Int
 
 class Operation2 op where
   compute2 :: op -> Int
-  show2 :: op -> String 
+  show2 :: op -> String
 
 instance Operation2 Add2 where
   compute2 (Add2 i j) = i+j
@@ -279,17 +279,25 @@ passwordAllowed psw (Or a b) = passwordAllowed psw a || passwordAllowed psw b
 --     ==> "(3*(1+1))"
 --
 
-data Arithmetic = Todo
+data Arithmetic =
+  Arithmetic Integer
+  | Addition Arithmetic Arithmetic
+  | Multiplication Arithmetic Arithmetic
   deriving Show
 
 literal :: Integer -> Arithmetic
-literal = todo
+literal = Arithmetic
 
 operation :: String -> Arithmetic -> Arithmetic -> Arithmetic
-operation = todo
+operation "+" a b = Addition a b
+operation "*" a b = Multiplication a b
 
 evaluate :: Arithmetic -> Integer
-evaluate = todo
+evaluate (Arithmetic a) = a
+evaluate (Addition a b) = evaluate a + evaluate b
+evaluate (Multiplication a b) = evaluate a * evaluate b
 
 render :: Arithmetic -> String
-render = todo
+render (Arithmetic a) = show a
+render (Addition a b) = "(" ++ render a ++ "+" ++ render b ++ ")"
+render (Multiplication a b) = "(" ++ render a ++ "*" ++ render b ++ ")"
