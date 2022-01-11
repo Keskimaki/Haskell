@@ -13,7 +13,7 @@ data Country = Finland | Switzerland | Norway
   deriving Show
 
 instance Eq Country where
-  Finland == Finland = True 
+  Finland == Finland = True
   Switzerland == Switzerland = True
   Norway == Norway = True
   _ == _ = False
@@ -121,7 +121,7 @@ instance Ord Number where
   (Finite i) <= (Finite j) = i <= j
   Infinite <= Infinite = True
   Infinite <= _ = False
-  _ <= Infinite = True 
+  _ <= Infinite = True
 
 ------------------------------------------------------------------------------
 -- Ex 8: rational numbers have a numerator and a denominator that are
@@ -211,6 +211,17 @@ instance Num RationalNumber where
 --   add [1,2] [3,4]        ==>  [1,2,3,4]
 --   add zero [True,False]  ==>  [True,False]
 
+class Addable a where
+  zero :: a
+  add :: a -> a -> a
+
+instance Addable Integer where
+  zero = 0
+  add = (+)
+
+instance Addable [a] where
+  zero = []
+  add = (++) 
 
 ------------------------------------------------------------------------------
 -- Ex 12: cycling. Implement a type class Cycle that contains a
