@@ -44,7 +44,7 @@ data Name = Name String
   deriving Show
 
 instance Eq Name where
-  (==) = todo
+  Name n1 == Name n2 = map toLower n1 == map toLower n2 
 
 ------------------------------------------------------------------------------
 -- Ex 4: here is a list type parameterized over the type it contains.
