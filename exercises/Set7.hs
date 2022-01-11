@@ -95,10 +95,20 @@ add x (Set xs) = if member x (Set xs)
 data Event = AddEggs | AddFlour | AddSugar | Mix | Bake
   deriving (Eq,Show)
 
-data State = Start | Error | Finished
+data State = Start | Eggs | Flour | Sugar | FlourAndSugar | Mixed | Error | Finished
   deriving (Eq,Show)
 
-step = todo
+step :: State -> Event -> State
+step Error _ = Error
+step Finished _ = Finished
+step Start AddEggs = Eggs
+step Eggs AddFlour = Flour
+step Eggs AddSugar = Sugar
+step Flour AddSugar = FlourAndSugar
+step Sugar AddFlour = FlourAndSugar
+step FlourAndSugar Mix = Mixed
+step Mixed Bake = Finished
+step _ _ = Error
 
 -- do not edit this
 bake :: [Event] -> State
