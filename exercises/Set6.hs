@@ -44,7 +44,7 @@ data Name = Name String
   deriving Show
 
 instance Eq Name where
-  Name n1 == Name n2 = map toLower n1 == map toLower n2 
+  Name n1 == Name n2 = map toLower n1 == map toLower n2
 
 ------------------------------------------------------------------------------
 -- Ex 4: here is a list type parameterized over the type it contains.
@@ -58,7 +58,10 @@ data List a = Empty | LNode a (List a)
   deriving Show
 
 instance Eq a => Eq (List a) where
-  (==) = todo
+  Empty == Empty = True
+  _ == Empty = False
+  Empty == _ = False
+  LNode x xs == LNode y ys = (x == y) && (xs == ys)
 
 ------------------------------------------------------------------------------
 -- Ex 5: below you'll find two datatypes, Egg and Milk. Implement a
