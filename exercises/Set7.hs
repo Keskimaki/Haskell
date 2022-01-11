@@ -132,7 +132,8 @@ average xs = sum xs / fromIntegral (length xs)
 -- Ex 5: reverse a NonEmpty list.
 
 reverseNonEmpty :: NonEmpty a -> NonEmpty a
-reverseNonEmpty = todo
+reverseNonEmpty (x:|[]) = x:|[]
+reverseNonEmpty (x:|xs) = last xs :| tail (reverse xs) ++ [x]
 
 ------------------------------------------------------------------------------
 -- Ex 6: implement Semigroup instances for the Distance, Time and
