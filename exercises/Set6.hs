@@ -167,7 +167,8 @@ instance Eq RationalNumber where
 -- Hint: Remember the function gcd?
 
 simplify :: RationalNumber -> RationalNumber
-simplify p = todo
+simplify (RationalNumber n d) = RationalNumber (div n i) (div d i)
+  where i = gcd n d
 
 ------------------------------------------------------------------------------
 -- Ex 10: implement the typeclass Num for RationalNumber. The results
