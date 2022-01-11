@@ -189,12 +189,14 @@ simplify (RationalNumber n d) = RationalNumber (div n i) (div d i)
 --   signum (RationalNumber 0 2)             ==> RationalNumber 0 1
 
 instance Num RationalNumber where
-  p + q = todo
-  p * q = todo
-  abs q = todo
-  signum q = todo
-  fromInteger x = todo
-  negate q = todo
+  RationalNumber n1 d1 + RationalNumber n2 d2 = simplify (RationalNumber (n1*d2 + n2*d1) (d1*d2))
+  RationalNumber n1 d1 * RationalNumber n2 d2 = simplify (RationalNumber (n1*n2) (d1*d2))
+  abs (RationalNumber n d) = if n < 0 then RationalNumber (-n) d else RationalNumber n d
+  signum (RationalNumber n d) | n == 0 = 0
+                              | n > 0 = 1
+                              | otherwise = -1
+  fromInteger x = RationalNumber x 1
+  negate (RationalNumber n d) = RationalNumber (0-n) d
 
 ------------------------------------------------------------------------------
 -- Ex 11: a class for adding things. Define a class Addable with a
