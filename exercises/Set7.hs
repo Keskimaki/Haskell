@@ -253,7 +253,11 @@ data PasswordRequirement =
   deriving Show
 
 passwordAllowed :: String -> PasswordRequirement -> Bool
-passwordAllowed = todo
+passwordAllowed psw (MinimumLength i) = length psw >= i
+passwordAllowed psw (ContainsSome str) = any (`elem` str) psw
+passwordAllowed psw (DoesNotContain str) = not (passwordAllowed psw (ContainsSome str))
+passwordAllowed psw (And a b) = passwordAllowed psw a && passwordAllowed psw b
+passwordAllowed psw (Or a b) = passwordAllowed psw a || passwordAllowed psw b
 
 ------------------------------------------------------------------------------
 -- Ex 10: a DSL for simple arithmetic expressions with addition and
