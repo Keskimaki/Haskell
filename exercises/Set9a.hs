@@ -44,7 +44,7 @@ workload nExercises hoursPerExercise
 
 echo :: String -> String
 echo "" = ""
-echo str = str ++ ", " ++ echo (tail str) 
+echo str = str ++ ", " ++ echo (tail str)
 
 ------------------------------------------------------------------------------
 -- Ex 3: A country issues some banknotes. The banknotes have a serial
@@ -57,7 +57,8 @@ echo str = str ++ ", " ++ echo (tail str)
 -- are valid.
 
 countValid :: [String] -> Int
-countValid = todo
+countValid xs = length [x | x <- [isValid x | x <- xs], x]
+  where isValid str = str !! 2 == str !! 4 || str !! 3 == str !! 5
 
 ------------------------------------------------------------------------------
 -- Ex 4: Find the first element that repeats two or more times _in a
