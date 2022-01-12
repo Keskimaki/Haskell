@@ -457,7 +457,13 @@ data Blur = Blur
   deriving Show
 
 instance Transform Blur where
-  apply = todo
+  apply Blur (Picture p) = Picture (\(Coord x y)
+    -> blurColor (p (Coord x y)) (p (Coord (x+1) y)) (p (Coord (x-1) y)) (p (Coord x (y+1))) (p (Coord x (y-1))))
+
+blurColor :: Color -> Color -> Color -> Color -> Color -> Color
+blurColor (Color r1 g1 b1) (Color r2 g2 b2) (Color r3 g3 b3) (Color r4 g4 b4) (Color r5 g5 b5) =
+  Color (div (r1+r2+r3+r4+r5) 5) (div (g1+g2+g3+g4+g5) 5) (div (b1+b2+b3+b4+b5) 5)
+
 ------------------------------------------------------------------------------
 
 ------------------------------------------------------------------------------
