@@ -70,7 +70,12 @@ countValid xs = length [x | x <- [isValid x | x <- xs], x]
 --   repeated [1,2,1,2,3,3] ==> Just 3
 
 repeated :: Eq a => [a] -> Maybe a
-repeated = todo
+repeated [] = Nothing 
+repeated (x:xs) = repeated' x xs
+repeated' _ [] = Nothing 
+repeated' n (x:xs)
+  | n == x = Just n
+  | otherwise = repeated' x xs
 
 ------------------------------------------------------------------------------
 -- Ex 5: A laboratory has been collecting measurements. Some of the
