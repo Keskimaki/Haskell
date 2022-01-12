@@ -233,7 +233,14 @@ danger coord (x:xs)
 -- solution to this version. Any working solution is okay in this exercise.)
 
 prettyPrint2 :: Size -> Stack -> String
-prettyPrint2 = todo
+prettyPrint2 n xs = helper n xs (prettyPrint n xs) (1,1)
+helper :: Int -> [Coord] -> String -> Coord -> String
+helper n xs [] coord = []
+helper n xs ('\n':ys) (i,j) = '\n' : if n == j then helper n xs ys (i+1,0) else helper n xs ys (nextCol (i,j))
+helper n xs ('Q':ys) (i,j) = 'Q' : if n == j then helper n xs ys (i+1,0) else helper n xs ys (nextCol (i,j))
+helper n xs (y:ys) (i,j)
+  | danger (i,j) xs = '#' : if n == j then helper n xs ys (i+1,0) else helper n xs ys (nextCol (i,j))
+  | otherwise = y : if n == j then helper n xs ys (i+1,0) else helper n xs ys (nextCol (i,j))
 
 --------------------------------------------------------------------------------
 -- Ex 6: Now that we can check if a piece can be safely placed into a square in
