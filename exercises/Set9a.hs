@@ -171,6 +171,19 @@ changeCode _ lock = lock
 data Text = Text String
   deriving Show
 
+instance Eq Text where
+  (Text []) == (Text []) = True
+  (Text (a:as)) == (Text [])
+    | isSpace a = Text as == Text []
+    | otherwise = False
+  (Text []) == (Text (b:bs))
+    | isSpace b = Text [] == Text bs
+    | otherwise = False
+  (Text (a:as)) == (Text (b:bs))
+    | isSpace a = Text as == Text (b:bs)
+    | isSpace b = Text (a:as) == Text bs
+    | a == b = Text as == Text bs
+    | otherwise = False
 
 ------------------------------------------------------------------------------
 -- Ex 8: We can represent functions or mappings as lists of pairs.
