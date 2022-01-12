@@ -263,5 +263,9 @@ identity n = [0 .. n - 1]
 multiply :: Permutation -> Permutation -> Permutation
 multiply p q = map (\i -> p !! (q !! i)) (identity (length p))
 
-permute :: Permutation -> [a] -> [a]
-permute = todo
+permute :: Ord a => Permutation -> [a] -> [a]
+permute p l = map snd (sort (transform p l))
+  where transform :: Permutation -> [a] -> [(Int, a)]
+        transform (p:ps) (l:ls) = (p,l) : transform ps ls
+        transform _ _ = []
+        
