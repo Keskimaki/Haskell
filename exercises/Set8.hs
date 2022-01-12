@@ -169,11 +169,10 @@ dotAndLine = Picture f
 --          ["7f0000","7f0000","7f0000"]]
 
 blendColor :: Color -> Color -> Color
-blendColor = todo
+blendColor (Color r1 g1 b1) (Color r2 g2 b2) = Color (div (r1+r2) 2) (div (g1+g2) 2) (div (b1+b2) 2)
 
 combine :: (Color -> Color -> Color) -> Picture -> Picture -> Picture
-combine = todo
-
+combine f (Picture f1) (Picture f2) = Picture (\coord -> f (f1 coord) (f2 coord))
 ------------------------------------------------------------------------------
 
 -- Let's define blend, we'll use it later
