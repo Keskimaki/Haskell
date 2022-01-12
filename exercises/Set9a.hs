@@ -43,7 +43,8 @@ workload nExercises hoursPerExercise
 -- Hint: use recursion
 
 echo :: String -> String
-echo = todo
+echo "" = ""
+echo str = str ++ ", " ++ echo (tail str) 
 
 ------------------------------------------------------------------------------
 -- Ex 3: A country issues some banknotes. The banknotes have a serial
