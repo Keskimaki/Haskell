@@ -285,7 +285,11 @@ helper n xs (y:ys) (i,j)
 --     Q#######
 
 fixFirst :: Size -> Stack -> Maybe Stack
-fixFirst n s = todo
+fixFirst n [] = Nothing
+fixFirst n ((i,j):xs)
+  | j > n = Nothing
+  | not (danger (i,j) xs) = Just ((i,j) : xs)
+  | otherwise = fixFirst n (nextCol (i,j) : xs)
 
 --------------------------------------------------------------------------------
 -- Ex 7: We need two helper functions for stack management.
