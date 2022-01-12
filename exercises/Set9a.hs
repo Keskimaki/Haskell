@@ -97,7 +97,12 @@ repeated' n (x:xs)
 --     ==> Left "no data"
 
 sumSuccess :: [Either String Int] -> Either String Int
-sumSuccess = todo
+sumSuccess [] = Left "no data"
+sumSuccess ((Left _): xs) = sumSuccess xs
+sumSuccess ((Right i):xs) = Right (i + helper xs)
+  where helper [] = 0
+        helper ((Right i): xs) = i + helper xs
+        helper ((Left _):xs) = helper xs
 
 ------------------------------------------------------------------------------
 -- Ex 6: A combination lock can either be open or closed. The lock
