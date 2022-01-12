@@ -133,7 +133,10 @@ renderListExample = renderList justADot (9,11) (9,11)
 --      ["000000","000000","000000"]]
 
 dotAndLine :: Picture
-dotAndLine = todo
+dotAndLine = Picture f
+  where f (Coord 3 4) = white
+        f (Coord _ 8) = pink
+        f _ = black
 ------------------------------------------------------------------------------
 
 ------------------------------------------------------------------------------
