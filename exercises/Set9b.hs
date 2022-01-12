@@ -386,7 +386,9 @@ backtrack (x1:x2:xs) = nextCol x2 : xs
 --     step 8 [(6,1),(5,4),(4,2),(3,5),(2,3),(1,1)] ==> [(5,5),(4,2),(3,5),(2,3),(1,1)]
 
 step :: Size -> Stack -> Stack
-step = todo
+step n xs = case fixFirst n xs of
+  Just xs -> continue xs
+  Nothing -> backtrack xs
 
 --------------------------------------------------------------------------------
 -- Ex 9: Let's solve our puzzle! The function finish takes a partial
