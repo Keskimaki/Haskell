@@ -99,8 +99,14 @@ nextCol (i,j) = (i,j+1)
 -- of the width (or height) n of the chess board; the naïve solution with elem
 -- takes O(n^3) time. Just ignore the previous sentence, if you're not familiar
 -- with the O-notation.)
+
 prettyPrint :: Size -> [Coord] -> String
-prettyPrint = todo
+prettyPrint n xs = helper n (1,1) xs
+  where helper n (x,y) xs
+          | x == n && y == n = sym ++ "\n"
+          | y == n = sym ++ "\n" ++ helper n (nextRow (x,y)) xs
+          | otherwise = sym ++ helper n (nextCol (x,y)) xs
+            where sym = if elem (x,y) xs then "Q" else "."
 
 --------------------------------------------------------------------------------
 -- Ex 3: The task in this exercise is to define the relations sameRow, sameCol,
