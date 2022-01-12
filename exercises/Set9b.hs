@@ -403,7 +403,9 @@ step n xs = case fixFirst n xs of
 -- solve the n queens problem.
 
 finish :: Size -> Stack -> Stack
-finish = todo
+finish n xs = if n >= length xs
+              then finish n (step n xs)
+              else tail xs
 
 solve :: Size -> Stack
 solve n = finish n [(1,1)]
