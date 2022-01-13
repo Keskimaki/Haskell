@@ -88,7 +88,9 @@ readUntil f = go f []
 -- Ex 6: given n, print the numbers from n to 0, one per line
 
 countdownPrint :: Int -> IO ()
-countdownPrint n = todo
+countdownPrint 0 = do print 0
+countdownPrint n = do print n
+                      countdownPrint (n-1)
 
 ------------------------------------------------------------------------------
 -- Ex 7: isums n should read n numbers from the user (one per line) and
