@@ -110,7 +110,13 @@ alternate xs ys z = cycle (xs ++ [z] ++ ys ++ [z])
 --   lengthAtLeast 10 [0..]  ==> True
 
 lengthAtLeast :: Int -> [a] -> Bool
-lengthAtLeast = todo
+lengthAtLeast n xs = helper n 0 xs
+  where helper n k []
+          | n == k = True 
+          | otherwise = False 
+        helper n k (x:xs)
+          | n == k = True
+          | otherwise = helper n (k+1) xs
 
 ------------------------------------------------------------------------------
 -- Ex 7: The function chunks should take in a list, and a number n,
