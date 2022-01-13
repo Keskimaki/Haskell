@@ -138,7 +138,9 @@ hFetchLines handle = do
 -- handle.
 
 hSelectLines :: Handle -> [Int] -> IO [String]
-hSelectLines h nums = todo
+hSelectLines h nums = do
+  lines <- hFetchLines h
+  return (map (\num -> lines !! (num-1)) nums)
 
 ------------------------------------------------------------------------------
 -- Ex 7: In this exercise we see how a program can be split into a
