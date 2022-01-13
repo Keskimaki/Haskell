@@ -38,7 +38,10 @@ doublify (x:xs) = x : x : doublify xs
 --   take 10 (interleave [1..] (repeat 0)) ==> [1,0,2,0,3,0,4,0,5,0]
 
 interleave :: [a] -> [a] -> [a]
-interleave = todo
+interleave [] [] = []
+interleave (x:xs) [] = x : interleave xs []
+interleave [] (y:ys) = y : interleave [] ys
+interleave (x:xs) (y:ys) = x : y : interleave xs ys
 
 ------------------------------------------------------------------------------
 -- Ex 3: Deal out cards. Given a list of players (strings), and a list
