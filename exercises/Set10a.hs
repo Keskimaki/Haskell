@@ -60,7 +60,7 @@ interleave (x:xs) (y:ys) = x : y : interleave xs ys
 -- Hint: remember the functions cycle and zip?
 
 deal :: [String] -> [String] -> [(String,String)]
-deal = todo
+deal xs ys = zip ys (cycle xs)
 
 ------------------------------------------------------------------------------
 -- Ex 4: Compute a running average. Go through a list of Doubles and
