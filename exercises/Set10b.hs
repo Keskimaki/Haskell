@@ -22,7 +22,8 @@ import Mooc.Todo
 --   False ||| undefined ==> an error!
 
 (|||) :: Bool -> Bool -> Bool
-x ||| y = todo
+_ ||| True = True
+x ||| _ = x 
 
 ------------------------------------------------------------------------------
 -- Ex 2: Define the function boolLength, that returns the length of a
