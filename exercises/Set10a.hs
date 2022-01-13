@@ -75,10 +75,12 @@ deal xs ys = zip ys (cycle xs)
 --   averages [3,2,1] ==> [3.0,2.5,2.0]
 --   take 10 (averages [1..]) ==> [1.0,1.5,2.0,2.5,3.0,3.5,4.0,4.5,5.0,5.5]
 
-
-
 averages :: [Double] -> [Double]
-averages = todo
+averages = averages' 1 0
+averages' n k [] = []
+averages' n k (x:xs) = avg : averages' (n+1) sum xs
+  where sum = k + x
+        avg = sum / n
 
 ------------------------------------------------------------------------------
 -- Ex 5: Given two lists, xs and ys, and an element z, generate an
