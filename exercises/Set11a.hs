@@ -141,7 +141,9 @@ ask = do putStrLn "Y/N?"
          return $ line == "Y"
 
 while :: IO Bool -> IO () -> IO ()
-while cond op = todo
+while cond op = do
+  c <- cond
+  when c (do op; while cond op)
 
 ------------------------------------------------------------------------------
 -- Ex 10: given a string and an IO operation, print the string, run
