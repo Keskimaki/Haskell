@@ -105,7 +105,13 @@ countdownPrint n = do print n
 --   5. produces 9
 
 isums :: Int -> IO Int
-isums n = todo
+isums n = go n 0
+  where go 0 sum = do
+          return sum
+        go n sum = do
+          i <- readLn
+          print (sum+i)
+          go (n-1) (sum+i)
 
 ------------------------------------------------------------------------------
 -- Ex 8: when is a useful function, but its first argument has type
