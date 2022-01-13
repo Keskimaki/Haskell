@@ -40,7 +40,11 @@ appendAll ref (x:xs) = do
 --   "x"
 
 swapIORefs :: IORef a -> IORef a -> IO ()
-swapIORefs = todo
+swapIORefs r1 r2 = do
+  val1 <- readIORef r1
+  val2 <- readIORef r2
+  writeIORef r1 val2
+  writeIORef r2 val1
 
 ------------------------------------------------------------------------------
 -- Ex 3: sometimes one bumps into IO operations that return IO
