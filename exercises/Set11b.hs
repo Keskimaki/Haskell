@@ -20,7 +20,12 @@ import Mooc.Todo
 --   "xfoobarquux"
 
 appendAll :: IORef String -> [String] -> IO ()
-appendAll = todo
+appendAll ref [] = do
+  val <- readIORef ref
+  putStrLn val
+appendAll ref (x:xs) = do
+  modifyIORef ref (++ x)
+  appendAll ref xs
 
 ------------------------------------------------------------------------------
 -- Ex 2: Given two IORefs, swap the values stored in them.
