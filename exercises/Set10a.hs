@@ -98,7 +98,7 @@ averages' n k (x:xs) = avg : averages' (n+1) sum xs
 --   take 10 (alternate [1,2] [3,4,5] 0) ==> [1,2,0,3,4,5,0,1,2,0]
 
 alternate :: [a] -> [a] -> a -> [a]
-alternate xs ys z = todo
+alternate xs ys z = cycle (xs ++ [z] ++ ys ++ [z])
 
 ------------------------------------------------------------------------------
 -- Ex 6: Check if the length of a list is at least n. Make sure your
