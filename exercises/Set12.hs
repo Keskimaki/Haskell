@@ -38,10 +38,10 @@ incrementAll = fmap (+1)
 --       ==> Just [Just True,Nothing]
 
 fmap2 :: (Functor f, Functor g) => (a -> b) -> f (g a) -> f (g b)
-fmap2 = todo
+fmap2 f  = fmap (fmap f)
 
 fmap3 :: (Functor f, Functor g, Functor h) => (a -> b) -> f (g (h a)) -> f (g (h b))
-fmap3 = todo
+fmap3 f = fmap (fmap2 f)
 
 ------------------------------------------------------------------------------
 -- Ex 3: below you'll find a type Result that works a bit like Maybe,
