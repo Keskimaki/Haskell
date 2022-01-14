@@ -210,10 +210,12 @@ data Tree a = Leaf | Node a (Tree a) (Tree a)
   deriving Show
 
 instance Functor Tree where
-  fmap = todo
+  fmap f Leaf = Leaf
+  fmap f (Node x l r) = Node (f x) (fmap f l) (fmap f r)
 
 sumTree :: Monoid m => Tree m -> m
-sumTree = todo
+sumTree Leaf = mempty
+sumTree (Node x l r) = sumTree l <> x <> sumTree r
 
 instance Foldable Tree where
   foldMap f t = sumTree (fmap f t)
