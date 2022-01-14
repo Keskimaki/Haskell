@@ -70,6 +70,8 @@ data List a = Empty | LNode a (List a)
   deriving Show
 
 instance Functor List where
+  fmap f Empty = Empty
+  fmap f (LNode x xs) = LNode (f x) (fmap f xs)
 
 ------------------------------------------------------------------------------
 -- Ex 5: Here's another list type. This type every node contains two
