@@ -112,7 +112,8 @@ count n f = foldr (add n) 0 f
 --   inBoth Nothing [3]    ==> []
 
 inBoth :: (Foldable f, Foldable g, Eq a) => f a -> g a -> [a]
-inBoth = todo
+inBoth f1 f2 = foldr (go f2) [] f1
+  where go f a acc = if elem a f then a : acc else acc
 
 ------------------------------------------------------------------------------
 -- Ex 8: Implement the instance Foldable List.
