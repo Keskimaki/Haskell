@@ -86,6 +86,8 @@ data TwoList a = TwoEmpty | TwoNode a a (TwoList a)
   deriving Show
 
 instance Functor TwoList where
+  fmap f TwoEmpty = TwoEmpty
+  fmap f (TwoNode x y xs) = TwoNode (f x) (f y) (fmap f xs)
 
 ------------------------------------------------------------------------------
 -- Ex 6: Count all occurrences of a given element inside a Foldable.
