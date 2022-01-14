@@ -54,7 +54,9 @@ data Result a = MkResult a | NoResult | Failure String
   deriving Show
 
 instance Functor Result where
-  fmap f result = todo
+  fmap f NoResult = NoResult
+  fmap f (Failure str) = Failure str
+  fmap f (MkResult a) = MkResult (f a)
 
 ------------------------------------------------------------------------------
 -- Ex 4: Here's a reimplementation of the Haskell list type. You might
