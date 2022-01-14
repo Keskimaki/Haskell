@@ -17,7 +17,7 @@ import Mooc.Todo
 --   incrementAll (Just 3.0)  ==>  Just 4.0
 
 incrementAll :: (Functor f, Num n) => f n -> f n
-incrementAll x = todo
+incrementAll = fmap (+1)
 
 ------------------------------------------------------------------------------
 -- Ex 2: Sometimes one wants to fmap multiple levels deep. Implement
