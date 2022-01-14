@@ -126,7 +126,8 @@ inBoth f1 f2 = foldr (go f2) [] f1
 --   length (LNode 1 (LNode 2 (LNode 3 Empty))) ==> 3
 
 instance Foldable List where
-  foldr = todo
+  foldr f n Empty = n
+  foldr f n (LNode x xs) = f x (foldr f n xs)
 
 ------------------------------------------------------------------------------
 -- Ex 9: Implement the instance Foldable TwoList.
