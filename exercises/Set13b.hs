@@ -200,7 +200,7 @@ findSum2 ks ns = do
 --     ==> [7,3,5,1,6,2,4,0]
 
 allSums :: [Int] -> [Int]
-allSums xs = todo
+allSums xs = map sum (subsequences xs)
 
 ------------------------------------------------------------------------------
 -- Ex 6: the standard library defines the function
