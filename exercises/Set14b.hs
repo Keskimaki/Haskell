@@ -237,7 +237,10 @@ simpleServer request respond = respond (responseLBS status200 [] (encodeResponse
 -- Remember:
 -- type Application = Request -> (Response -> IO ResponseReceived) -> IO ResponseReceived
 server :: Connection -> Application
-server db request respond = todo
+server db request respond = do
+  let command = parseCommand (pathInfo request)
+  res <- perform db command
+  respond (responseLBS status200 [] (encodeResponse res))
 
 port :: Int
 port = 3421
