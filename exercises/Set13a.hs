@@ -155,7 +155,15 @@ instance Applicative Logger where
   (<*>) = ap
 
 countAndLog :: Show a => (a -> Bool) -> [a] -> Logger Int
-countAndLog = todo
+countAndLog _ [] = return 0
+countAndLog f (x:xs) =
+  if f x
+  then do
+    msg (show x)
+    xs' <- countAndLog f xs
+    return (1 + xs')
+  else do
+    countAndLog f xs
 
 ------------------------------------------------------------------------------
 -- Ex 5: You can find the Bank and BankOp code from the course
