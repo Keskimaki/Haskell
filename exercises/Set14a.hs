@@ -90,7 +90,18 @@ takeStrict i text = TL.toStrict (TL.take i text)
 --   byteRange (B.pack [3]) ==> 0
 
 byteRange :: B.ByteString -> Word8
-byteRange = todo
+byteRange bstr =
+  if bstr == B.pack []
+    then 0
+    else helper bstr 255 0
+  where helper bstr min max
+          | bstr == B.pack [] = max - min
+          | head < min && head > max = helper tail head head
+          | head < min = helper tail head max
+          | head > max = helper tail min head
+          | otherwise = helper tail min max
+            where head = B.head bstr
+                  tail = B.tail bstr
 
 ------------------------------------------------------------------------------
 -- Ex 6: Compute the XOR checksum of a ByteString. The XOR checksum of
