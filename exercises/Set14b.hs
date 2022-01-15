@@ -154,7 +154,9 @@ parseInt :: T.Text -> Maybe Int
 parseInt = readMaybe . T.unpack
 
 parseCommand :: [T.Text] -> Maybe Command
-parseCommand [x, y] = Just (Balance y)
+parseCommand [x, y]
+  | x == T.pack "balance" = Just (Balance y)
+  | otherwise = Nothing 
 parseCommand [x, y, z]
   | x == T.pack "deposit" = parseInt z >>= \i -> Just (Deposit y i)
   | x == T.pack "withdraw" = parseInt z >>= \i -> Just (Deposit y (-i))
