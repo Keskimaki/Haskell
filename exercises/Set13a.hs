@@ -28,7 +28,7 @@ import Examples.Bank
 
 (?>) :: Maybe a -> (a -> Maybe b) -> Maybe b
 Nothing ?> _ = Nothing   -- In case of failure, propagate failure
-Just x  ?> f = f x       -- In case of sucess, run the next computation
+Just x  ?> f = f x       -- In case of success, run the next computation
 
 -- DO NOT touch this definition!
 readNames :: String -> Maybe (String,String)
@@ -44,20 +44,26 @@ readNames s =
 --
 -- (NB! There are obviously other corner cases like the inputs " " and
 -- "a b c", but you don't need to worry about those here)
+
 split :: String -> Maybe (String,String)
-split = todo
+split s = if elem ' ' s then go 0 s s else Nothing
+  where go _ _ [] = Nothing
+        go n s (x:xs) = if x == ' ' then Just (take n s, drop (n+1) s) else go (n+1) s xs
 
 -- checkNumber should take a pair of two strings and return them
 -- unchanged if they don't contain numbers. Otherwise Nothing is
 -- returned.
 checkNumber :: (String, String) -> Maybe (String, String)
-checkNumber = todo
+checkNumber s = helper s nums
+  where helper s [] = Just s
+        helper (s1, s2) (x:xs) = if elem x s1 || elem x s2 then Nothing else helper (s1, s2) xs
+        nums = ['0', '1', '2', '3', '4', '5', '6', '7', '8', '9']
 
 -- checkCapitals should take a pair of two strings and return them
 -- unchanged if both start with a capital letter. Otherwise Nothing is
 -- returned.
 checkCapitals :: (String, String) -> Maybe (String, String)
-checkCapitals (for,sur) = todo
+checkCapitals (for,sur) = if toLower (head for) == head for || toLower (head sur) == head sur then Nothing else Just (for, sur)
 
 ------------------------------------------------------------------------------
 -- Ex 2: Given a list of players and their scores (as [(String,Int)]),
