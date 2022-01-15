@@ -242,7 +242,13 @@ update = do
 --   parensMatch "(()))("      ==> False
 
 paren :: Char -> State Int ()
-paren = todo
+paren c = do
+  state <- get
+  if state == -1
+    then return ()
+    else if c == '('
+      then modify (+1)
+      else modify (\x -> x-1)
 
 parensMatch :: String -> Bool
 parensMatch s = count == 0
