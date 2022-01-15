@@ -212,7 +212,9 @@ rob from to = balance from +> withdrawOp from +> depositOp to
 --    ==> ((),7)
 
 update :: State Int ()
-update = todo
+update = do
+  modify (*2)
+  modify (+1)
 
 ------------------------------------------------------------------------------
 -- Ex 8: Checking that parentheses are balanced with the State monad.
