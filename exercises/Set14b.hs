@@ -113,7 +113,9 @@ balanceQuery :: Query
 balanceQuery = Query (T.pack "SELECT amount FROM events WHERE account = ?;")
 
 balance :: Connection -> T.Text -> IO Int
-balance = todo
+balance db name = do
+  bal <- query db balanceQuery [name] :: IO [[Int]]
+  return (sum (map sum bal))
 
 ------------------------------------------------------------------------------
 -- Ex 3: Now that we have the database part covered, let's think about
