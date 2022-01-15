@@ -305,4 +305,4 @@ count x = do
 --    ==> (4,[(2,1),(3,1),(4,1),(7,1)])
 
 occurrences :: (Eq a) => [a] -> State [(a,Int)] Int
-occurrences xs = todo
+occurrences = foldr ((>>) . count) (fmap length get)
