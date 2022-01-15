@@ -180,7 +180,9 @@ exampleBank :: Bank
 exampleBank = (Bank (Map.fromList [("harry",10),("cedric",7),("ginny",1)]))
 
 balance :: String -> BankOp Int
-balance accountName = todo
+balance accountName = BankOp (getBalance accountName)
+  where getBalance :: String -> Bank -> (Int, Bank)
+        getBalance accountName (Bank m) = (Map.findWithDefault 0 accountName m, Bank m)
 
 ------------------------------------------------------------------------------
 -- Ex 6: Using the operations balance, withdrawOp and depositOp, and
