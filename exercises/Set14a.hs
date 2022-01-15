@@ -56,7 +56,16 @@ shout text = T.strip (go (T.words text) True)
 --   longestRepeat (T.pack "aabbbbccc") ==> 4
 
 longestRepeat :: T.Text -> Int
-longestRepeat = todo
+longestRepeat text = helper text 0 0 ' '
+  where helper text max cur prev = case T.uncons text of
+          Nothing -> max
+          Just (x,xs) -> if x == prev 
+                          then if (cur+1) > max 
+                            then helper xs (cur+1) (cur+1) prev 
+                            else helper xs max (cur+1) prev 
+                            else if max == 0 
+                              then helper xs 1 1 x 
+                              else helper xs max 1 x
 
 ------------------------------------------------------------------------------
 -- Ex 4: Given a lazy (potentially infinite) Text, extract the first n
