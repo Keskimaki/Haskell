@@ -78,7 +78,7 @@ longestRepeat text = helper text 0 0 ' '
 --   takeStrict 15 (TL.pack (cycle "asdf"))  ==>  "asdfasdfasdfasd"
 
 takeStrict :: Int64 -> TL.Text -> T.Text
-takeStrict = todo
+takeStrict i text = TL.toStrict (TL.take i text)
 
 ------------------------------------------------------------------------------
 -- Ex 5: Find the difference between the largest and smallest byte
