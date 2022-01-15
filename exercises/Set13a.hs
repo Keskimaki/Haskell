@@ -90,7 +90,14 @@ checkCapitals (for,sur) = if toLower (head for) == head for || toLower (head sur
 --     ==> Just "a"
 
 winner :: [(String,Int)] -> String -> String -> Maybe String
-winner scores player1 player2 = todo
+--winner scores player1 player2 = do
+--  p1 <- lookup player1 scores
+--  p2 <- lookup player2 scores
+--  if p1 < p2
+--    then return player2
+--    else return player1
+
+winner scores player1 player2 = lookup player1 scores ?> (\p1 -> lookup player2 scores ?> (\p2 -> if p1 < p2 then return player2 else return player1))
 
 ------------------------------------------------------------------------------
 -- Ex 3: given a list of indices and a list of values, return the sum
