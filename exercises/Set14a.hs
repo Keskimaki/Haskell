@@ -41,7 +41,11 @@ greetText text = T.concat [T.pack "Hello, ", name, T.pack "!"]
 --     ==> "WORD"
 
 shout :: T.Text -> T.Text
-shout = todo
+shout text = T.strip (go (T.words text) True)
+  where go [] _ = T.pack ""
+        go (x:xs) bool 
+          | bool = T.map toUpper x <> T.pack " " <> go xs (not bool)
+          | otherwise = x <> T.pack " " <> go xs (not bool)
 
 ------------------------------------------------------------------------------
 -- Ex 3: Find the longest sequence of a single character repeating in
