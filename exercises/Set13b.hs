@@ -89,7 +89,7 @@ mapM2 :: Monad m => (a -> b -> m c) -> [a] -> [b] -> m [c]
 mapM2 _ [] _ = return []
 mapM2 _ _ [] = return []
 mapM2 op (x:xs) (y:ys) = do
-  x <- op x y 
+  x <- op x y
   xs <- mapM2 op xs ys
   return (x:xs)
 
@@ -230,7 +230,9 @@ sumBounded :: Int -> [Int] -> Maybe Int
 sumBounded k xs = foldM (f1 k) 0 xs
 
 f1 :: Int -> Int -> Int -> Maybe Int
-f1 k acc x = todo
+f1 k acc x
+  | acc + x <= k = Just (acc + x)
+  | otherwise = Nothing 
 
 -- sumNotTwice computes the sum of a list, but counts only the first
 -- occurrence of each value.
@@ -244,7 +246,11 @@ sumNotTwice :: [Int] -> Int
 sumNotTwice xs = fst $ runState (foldM f2 0 xs) []
 
 f2 :: Int -> Int -> State [Int] Int
-f2 acc x = todo
+f2 acc x = do
+  state <- get
+  if elem x state
+    then return acc
+    else modify (x:) >> return (acc + x)
 
 ------------------------------------------------------------------------------
 -- Ex 7: here is the Result type from Set12. Implement a Monad Result
