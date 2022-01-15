@@ -154,7 +154,9 @@ parseInt :: T.Text -> Maybe Int
 parseInt = readMaybe . T.unpack
 
 parseCommand :: [T.Text] -> Maybe Command
-parseCommand = todo
+parseCommand [x, y] = Just (Balance y)
+parseCommand [x, y, z] = parseInt z >>= \i -> Just (Deposit y i)
+parseCommand _ = Nothing
 
 ------------------------------------------------------------------------------
 -- Ex 4: Running commands. Implement the IO operation perform that takes a
