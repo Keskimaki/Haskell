@@ -28,7 +28,8 @@ import qualified Data.ByteString.Lazy as BL
 --  greetText (T.pack "Benedict Cumberbatch") ==> "Hello, Benedict Cumber...!"
 
 greetText :: T.Text -> T.Text
-greetText = todo
+greetText text = T.concat [T.pack "Hello, ", name, T.pack "!"]
+  where name = if T.length text > 15 then T.take 15 text <> T.pack "..." else text
 
 ------------------------------------------------------------------------------
 -- Ex 2: Capitalize every second word of a Text.
