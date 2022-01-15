@@ -115,7 +115,13 @@ winner scores player1 player2 = lookup player1 scores ?> (\p1 -> lookup player2 
 --    Nothing
 
 selectSum :: Num a => [a] -> [Int] -> Maybe a
-selectSum xs is = todo
+selectSum _ [] = Just 0
+selectSum xs (i:is) = safeIndex xs i >>= (\x -> selectSum xs is >>= \xs -> return (x + xs))
+
+safeIndex :: [a] -> Int -> Maybe a
+safeIndex xs n
+  | n >= 0 && n < length xs = Just (xs !! n)
+  | otherwise = Nothing 
 
 ------------------------------------------------------------------------------
 -- Ex 4: Here is the Logger monad from the course material. Implement
