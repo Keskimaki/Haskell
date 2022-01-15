@@ -141,7 +141,9 @@ xorChecksum bstr
 --   countUtf8Chars (B.drop 1 (encodeUtf8 (T.pack "åäö"))) ==> Nothing
 
 countUtf8Chars :: B.ByteString -> Maybe Int
-countUtf8Chars = todo
+countUtf8Chars bstr = case decodeUtf8' bstr of
+  Right text -> Just (T.length text)
+  _ -> Nothing 
 
 ------------------------------------------------------------------------------
 -- Ex 8: Given a (nonempty) strict ByteString b, generate an infinite
