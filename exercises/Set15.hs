@@ -137,9 +137,11 @@ data Person = Person String Int Bool
   deriving (Show, Eq)
 
 twoPersons :: Applicative f =>
-  f String -> f Int -> f Bool -> f String -> f Int -> f Bool
-  -> f [Person]
-twoPersons name1 age1 employed1 name2 age2 employed2 = todo
+  f String -> f Int -> f Bool -> f String -> f Int -> f Bool -> f [Person]
+twoPersons name1 age1 employed1 name2 age2 employed2 = sequenceA [mkPerson name1 age1 employed1, mkPerson name2 age2 employed2]
+
+mkPerson :: Applicative f => f String -> f Int -> f Bool -> f Person
+mkPerson n a e = Person <$> n <*> a <*> e
 
 ------------------------------------------------------------------------------
 -- Ex 7: Validate a String that's either a Bool or an Int. The return
