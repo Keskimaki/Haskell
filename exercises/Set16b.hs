@@ -105,3 +105,11 @@ toFull (Name first) (Name last) = Name (first ++ " " ++ last)
 class Render currency where
   render :: Money currency -> String
 
+instance Render EUR where
+  render (Money amount) = show amount ++ "e"
+
+instance Render USD where
+  render (Money amount) = "$" ++ show amount
+
+instance Render CHF where
+  render (Money amount) = show amount ++ "chf"
