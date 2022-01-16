@@ -108,7 +108,16 @@ data Address = Address String String String
   deriving (Show,Eq)
 
 validateAddress :: String -> String -> String -> Validation Address
-validateAddress streetName streetNumber postCode = todo
+validateAddress streetName streetNumber postCode = Address <$> checkStreet streetName <*> checkNumber streetNumber <*> checkCode postCode
+
+checkStreet :: String -> Validation String
+checkStreet street = check (length street <= 20) "Invalid street name" street
+
+checkNumber :: String -> Validation String
+checkNumber number = check (all isDigit number) "Invalid street number" number
+
+checkCode :: String -> Validation String
+checkCode code = check (length code == 5 && all isDigit code) "Invalid postcode" code
 
 ------------------------------------------------------------------------------
 -- Ex 6: Given the names, ages and employment statuses of two
