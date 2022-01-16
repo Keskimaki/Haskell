@@ -36,7 +36,9 @@ sumTwoMaybes = liftA2 (+)
 --         "code is not suffering","code is not life"]
 
 statements :: [String] -> [String] -> [String]
-statements = todo
+statements xs ys = liftA2 combine xs ys'
+  where combine x y = x ++ " is " ++ y
+        ys' = ys ++ map ("not " ++) ys
 
 ------------------------------------------------------------------------------
 -- Ex 3: A simple calculator with error handling. Given an operation
