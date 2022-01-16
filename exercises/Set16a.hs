@@ -175,7 +175,11 @@ frequencies (x:ys) = (x, length xs) : frequencies others
 --  [2,4,10]
 
 genList :: Gen [Int]
-genList = todo
+genList = do
+  let ele = elements [0..10]
+  len <- choose (3,5)
+  vec <- vectorOf len ele
+  return (sort vec)
 
 ------------------------------------------------------------------------------
 -- Ex 7: Here are the datatypes Arg and Expression from Set 15. Write
