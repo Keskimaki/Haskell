@@ -56,7 +56,12 @@ statements xs ys = liftA2 combine xs ys'
 --  calculator "double" "7x"  ==> Nothing
 
 calculator :: String -> String -> Maybe Int
-calculator = todo
+calculator op i = parseOp op <*> readMaybe i
+
+parseOp :: String -> Maybe (Int -> Int)
+parseOp "negate" = Just (\x -> -x)
+parseOp "double" = Just (2*)
+parseOp _ = Nothing
 
 ------------------------------------------------------------------------------
 -- Ex 4: Safe division. Implement the function validateDiv that
