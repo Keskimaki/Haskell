@@ -217,7 +217,11 @@ data Expression = Plus Arg Arg | Minus Arg Arg
   deriving (Show, Eq)
 
 instance Arbitrary Arg where
-  arbitrary = todo
+  arbitrary = oneof [elements [Variable c | c <- ['a','b','c','x','y','z']], elements [Number i | i <- [0..10]]]
 
 instance Arbitrary Expression where
-  arbitrary = todo
+  arbitrary = do
+    arg1 <- arbitrary
+    arg2 <- arbitrary
+    op <- elements [Plus, Minus]
+    return (op arg1 arg2)
