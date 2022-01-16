@@ -161,7 +161,20 @@ mkPerson n a e = Person <$> n <*> a <*> e
 --  boolOrInt "Falseb"  ==> Errors ["Not a Bool","Not an Int"]
 
 boolOrInt :: String -> Validation (Either Bool Int)
-boolOrInt = todo
+boolOrInt str = checkBool str <|> checkInt str
+
+checkBool :: String -> Validation (Either Bool Int)
+checkBool "True" = pure (Left True)
+checkBool "False" = pure (Left False)
+checkBool _ = invalid "Not a Bool"
+
+checkInt :: String -> Validation (Either Bool Int)
+checkInt i = case parseInt i of
+  (Just i) -> pure (Right i)
+  Nothing -> invalid "Not an Int"
+
+parseInt :: String -> Maybe Int 
+parseInt = readMaybe
 
 ------------------------------------------------------------------------------
 -- Ex 8: Improved phone number validation. Implement the function
