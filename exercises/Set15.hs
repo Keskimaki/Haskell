@@ -78,7 +78,7 @@ parseOp _ = Nothing
 --  validateDiv 0 3 ==> Ok 0
 
 validateDiv :: Int -> Int -> Validation Int
-validateDiv = todo
+validateDiv i j = check (j /= 0) "Division by zero!" (div i j)  
 
 ------------------------------------------------------------------------------
 -- Ex 5: Validating street addresses. A street address consists of a
