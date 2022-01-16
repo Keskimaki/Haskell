@@ -86,9 +86,12 @@ toLast = Name
 --  capitalize (toLast "smith") :: Name Last
 --  fromName (capitalize (toLast "smith")) ==> "Smith"
 
-capitalize = todo
+capitalize :: Name a -> Name a
+capitalize (Name "") = Name ""
+capitalize (Name (x:xs)) = Name (toUpper x : xs)
 
-toFull = todo
+toFull :: Name First -> Name Last -> Name Full
+toFull (Name first) (Name last) = Name (first ++ " " ++ last)
 
 ------------------------------------------------------------------------------
 -- Ex 5: Type classes can let you write code that handles different
