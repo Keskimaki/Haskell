@@ -198,7 +198,20 @@ parseInt = readMaybe
 --    ==> Errors ["Too long"]
 
 normalizePhone :: String -> Validation String
-normalizePhone = todo
+normalizePhone str = checkLength phone <* checkDigits phone
+  where phone = removeSpaces str
+
+removeSpaces :: String -> String
+removeSpaces [] = []
+removeSpaces (x:xs)
+  | x == ' ' = removeSpaces xs
+  | otherwise = x : removeSpaces xs
+
+checkLength :: String -> Validation String
+checkLength str = check (length str <= 10) "Too long" str
+
+checkDigits :: String -> Validation String
+checkDigits = traverse (\x -> check (isDigit x) ("Invalid character: " ++ [x]) x)
 
 ------------------------------------------------------------------------------
 -- Ex 9: Parsing expressions. The Expression type describes an
