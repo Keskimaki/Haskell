@@ -18,7 +18,11 @@ import Data.List
 --  +++ OK, passed 1 test.
 
 isSorted :: (Show a, Ord a) => [a] -> Property
-isSorted = todo
+isSorted xs = xs === sort xs
+
+--isAscending :: Int -> [Int] -> Bool
+--isAscending x [] = True
+--isAscending x (y:ys) = (y > x) && isAscending y ys
 
 ------------------------------------------------------------------------------
 -- Ex 2: In this and the following exercises, we'll build a suite of
