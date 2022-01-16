@@ -10,7 +10,10 @@ import Data.Char (toUpper)
 -- 3. The type Money is imported from Example.Phantom but you'll need
 -- to introduce GBP yourself.
 
-pounds = todo
+data GBP
+
+pounds :: Money GBP
+pounds = Money 3
 
 ------------------------------------------------------------------------------
 -- Ex 2: Implement composition for Rates. Give composeRates a
